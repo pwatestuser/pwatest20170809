@@ -45,7 +45,7 @@
 // ホーム用？
 window.addEventListener('load', function() {
   if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('/serviceWorker.js')
+    navigator.serviceWorker.register('/service-worker.js')
       .then(function(registration) {
         return registration.pushManager.getSubscription().then(function(subscription) {
           if (subscription) {
@@ -101,6 +101,18 @@ navigator.serviceWorker.register("/serviceWorker.js").then();
     <p><input type="file" name="upfile" id="upfile" accept="image/*" capture="camera" /></p>
     <p><input type="submit" name="save" value="保存" /></p>
   </form>
-
+<script src="https://www.gstatic.com/firebasejs/4.2.0/firebase.js"></script>
+<script>
+  // Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyChlILmJsV3psL0dGRtYlBwYhxEzPfUBiA",
+    authDomain: "pwatest-176008.firebaseapp.com",
+    databaseURL: "https://pwatest-176008.firebaseio.com",
+    projectId: "pwatest-176008",
+    storageBucket: "",
+    messagingSenderId: "656106728875"
+  };
+  firebase.initializeApp(config);
+</script>
 </body>
 </html>
