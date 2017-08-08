@@ -1,0 +1,118 @@
+<!--
+ Copyright 2016 Google Inc.
+ 
+ Licensed under the Apache License, Version 2.0 (the "License");
+ you may not use this file except in compliance with the License.
+ You may obtain a copy of the License at
+ 
+      http://www.apache.org/licenses/LICENSE-2.0
+ 
+ Unless required by applicable law or agreed to in writing, software
+ distributed under the License is distributed on an "AS IS" BASIS,
+ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ See the License for the specific language governing permissions and
+ limitations under the License.
+-->
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <link rel="canonical" href="https://weather-pwa-sample.firebaseapp.com/final/">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PWA test page</title>
+  <link rel="stylesheet" type="text/css" href="styles/inline.css">
+  <!-- TODO add manifest here -->
+  <link rel="manifest" href="/manifest.json">
+  <!-- Add to home screen for Safari on iOS -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="apple-mobile-web-app-title" content="Weather PWA">
+  <link rel="apple-touch-icon" href="images/icons/icon-152x152.png">
+  <meta name="msapplication-TileImage" content="images/icons/icon-144x144.png">
+  <meta name="msapplication-TileColor" content="#2F3BA2">
+</head>
+<body>
+
+  <header class="header">
+    <h1 class="header__title">PWA test page</h1>
+    <button id="butRefresh" class="headerButton" aria-label="Refresh"></button>
+    <button id="butAdd" class="headerButton" aria-label="Add"></button>
+  </header>
+
+<script>
+// ホーム用？
+window.addEventListener('load', function() {
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('/serviceWorker.js')
+      .then(function(registration) {
+        return registration.pushManager.getSubscription().then(function(subscription) {
+          if (subscription) {
+            return subscription
+          }
+          return registration.pushManager.subscribe({
+            userVisibleOnly: true
+          })
+        })
+      }).then(function(subscription) {
+        var endpoint = subscription.endpoint
+        console.log("pushManager endpoint:", endpoint) // https://android.googleapis.com/gcm/send/******:******......
+      }).catch(function(error) {
+        console.warn("serviceWorker error:", error)
+      })
+  }
+})
+
+// push用？
+var registerSubscription = function(subscription){
+  if(subscription){
+    $.post("/api/register", {endpoint: subscription.endpoint})
+  }
+};
+ 
+navigator.serviceWorker.ready.then(function(serviceWorker){
+  serviceWorker.pushManager.getSubscription().then(function(subscription){
+    if(subscription === null){
+      serviceWorker.pushManager.subscribe({userVisibleOnly: true}).then(registerSubscription);
+    }
+  });
+});
+navigator.serviceWorker.register("/serviceWorker.js").then();
+
+//window.addEventListener('load', function() {
+//  if ('serviceWorker' in navigator) {
+//    navigator.serviceWorker.register("/serviceWorker.js")
+//      .then(function(registration) {
+//        console.log("serviceWorker registed.");
+//      }).catch(function(error) {
+//        console.warn("serviceWorker error.", error);
+//      });
+//  }
+//});
+</script>
+  <form action="upload.php" method="post" enctype="multipart/form-data">
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <p><input type="file" name="upfile" id="upfile" accept="image/*" capture="camera" /></p>
+    <p><input type="submit" name="save" value="保存" /></p>
+  </form>
+<script src="https://www.gstatic.com/firebasejs/4.2.0/firebase.js"></script>
+<script>
+  // Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyChlILmJsV3psL0dGRtYlBwYhxEzPfUBiA",
+    authDomain: "pwatest-176008.firebaseapp.com",
+    databaseURL: "https://pwatest-176008.firebaseio.com",
+    projectId: "pwatest-176008",
+    storageBucket: "",
+    messagingSenderId: "656106728875"
+  };
+  firebase.initializeApp(config);
+</script>
+</body>
+</html>
