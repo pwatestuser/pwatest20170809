@@ -8,7 +8,7 @@
             "type": "image/png"
         }
     ],
-    "start_url": "https://pwatestuser.github.io/pwatest20170806/test/",
+    "start_url": "https://pwatestuser.github.io/pwatest20170809/test/",
     "display": "standalone",
     "theme_color": "#e91e63",
     "permissions": [
