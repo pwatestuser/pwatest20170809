@@ -1,4 +1,4 @@
-self.addEventListener("onload", function(){
+self.addEventListener("install", function(){
 	setTimeout(function(){
     self.registration.showNotification("プッシュタイトル", {
       body: "プッシュ通知",
