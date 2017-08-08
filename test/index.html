@@ -24,7 +24,7 @@
   <title>PWA test page</title>
   <link rel="stylesheet" type="text/css" href="styles/inline.css">
   <!-- TODO add manifest here -->
-  <link rel="manifest" href="/manifest.json">
+  <link rel="manifest" href="./manifest.json">
   <!-- Add to home screen for Safari on iOS -->
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
@@ -45,7 +45,7 @@
 // ホーム用？
 window.addEventListener('load', function() {
   if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('/serviceWorker.js')
+    navigator.serviceWorker.register('./service-worker.js')
       .then(function(registration) {
         return registration.pushManager.getSubscription().then(function(subscription) {
           if (subscription) {
@@ -63,7 +63,6 @@ window.addEventListener('load', function() {
       })
   }
 })
-
 // push用？
 var registerSubscription = function(subscription){
   if(subscription){
@@ -71,15 +70,13 @@ var registerSubscription = function(subscription){
   }
 };
  
-navigator.serviceWorker.ready.then(function(serviceWorker){
-  serviceWorker.pushManager.getSubscription().then(function(subscription){
-    if(subscription === null){
-      serviceWorker.pushManager.subscribe({userVisibleOnly: true}).then(registerSubscription);
-    }
-  });
-});
-navigator.serviceWorker.register("/serviceWorker.js").then();
-
+//navigator.serviceWorker.ready.then(function(serviceWorker){
+//  serviceWorker.pushManager.getSubscription().then(function(subscription){
+//    if(subscription === null){
+//      serviceWorker.pushManager.subscribe({userVisibleOnly: true}).then(registerSubscription);
+//    }
+//  });
+//});
 //window.addEventListener('load', function() {
 //  if ('serviceWorker' in navigator) {
 //    navigator.serviceWorker.register("/serviceWorker.js")
