@@ -98,7 +98,7 @@ var registerSubscription = function(subscription){
     <br>
     <p><input type="file" name="upfile" id="upfile" accept="image/*" capture="camera" /></p>
     <p><input type="text" name="msg" id="msg" size="30"/></p>
-    <p><input type="submit" name="save" value="push" /></p>
+    <p><input type="button" name="pushbutton" value="push" /></p>
   </form>
 <script src="https://www.gstatic.com/firebasejs/4.2.0/firebase.js"></script>
 <script>
@@ -114,7 +114,7 @@ var registerSubscription = function(subscription){
   firebase.initializeApp(config);
 </script>
 <script type="text/javascript">
-$('#button').on('click', function(){
+$(':button[name="pushbutton"]').on('click', function(){
  　　var msg = $(':text[name="msg"]').val();
         Push.create('こんにちは！', {
 　　        body: msg,
