@@ -114,18 +114,19 @@ var registerSubscription = function(subscription){
   firebase.initializeApp(config);
 </script>
 <script type="text/javascript">
-$(':button[name="pushbutton"]').on('click', function(){
- 　　var msg = $(':text[name="msg"]').val();
-        Push.create('こんにちは！', {
-　　        body: msg,
-　　        icon: 'icon.png',
-　　        timeout: 800, // 通知が消えるタイミング
-　　        vibrate: [100, 100, 100], // モバイル端末でのバイブレーション秒数
-　　        onClick: function() {
+//$(':button[name="pushbutton"]').on('click', function(){
+// 　　var msg = $(':text[name="msg"]').val();
+//        Push.create('こんにちは！', {
+//　　        body: msg,
+//　　        icon: 'icon.png',
+//　　        timeout: 800, // 通知が消えるタイミング
+//　　        vibrate: [100, 100, 100], // モバイル端末でのバイブレーション秒数
+//　　        onClick: function() {
 　　　　        // 通知がクリックされた場合の設定
-　　　　        console.log(this);
-        　　}
-});
+//　　　　        console.log(this);
+//             }
+//        });
+//});
 </script>
 </body>
 </html>
