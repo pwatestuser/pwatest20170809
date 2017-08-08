@@ -41,6 +41,7 @@
     <button id="butAdd" class="headerButton" aria-label="Add"></button>
   </header>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/push.js/0.0.11/push.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
 <script>
 // ホーム用？
 window.addEventListener('load', function() {
@@ -96,7 +97,8 @@ var registerSubscription = function(subscription){
     <br>
     <br>
     <p><input type="file" name="upfile" id="upfile" accept="image/*" capture="camera" /></p>
-    <p><input type="submit" name="save" value="保存" /></p>
+    <p><input type="text" name="msg" id="msg" size="30"/></p>
+    <p><input type="button" name="pushbutton" value="push" /></p>
   </form>
 <script src="https://www.gstatic.com/firebasejs/4.2.0/firebase.js"></script>
 <script>
@@ -112,10 +114,10 @@ var registerSubscription = function(subscription){
   firebase.initializeApp(config);
 </script>
 <script type="text/javascript">
-$(function(){
-    setInterval(function(){
+$(':button[name="pushbutton"]').on('click', function(){
+ 　　var msg = $(':text[name="msg"]').val();
         Push.create('こんにちは！', {
-　　        body: '更新をお知らせします！',
+　　        body: msg,
 　　        icon: 'icon.png',
 　　        timeout: 800, // 通知が消えるタイミング
 　　        vibrate: [100, 100, 100], // モバイル端末でのバイブレーション秒数
@@ -123,8 +125,6 @@ $(function(){
 　　　　        // 通知がクリックされた場合の設定
 　　　　        console.log(this);
         　　}
-        });    },1000);
-
 });
 </script>
 </body>
