@@ -3,8 +3,7 @@ self.addEventListener("install", function(){
     self.registration.showNotification("プッシュタイトル", {
       body: "プッシュ通知",
       icon: "/images/icons/icon-144x144.png",
-      tag: "tag",
-      url: "https://pwatestuser.github.io/pwatest20170809/test/"
+      tag: "tag"
     });
 	},5000);
 });
@@ -22,5 +21,5 @@ self.addEventListener("push", function(event){
 
 self.addEventListener("notificationclick", function(event) {
   event.notification.close();
-  clients.openWindow("/");
+  clients.openWindow("https://pwatestuser.github.io/pwatest20170809/test/");
 }, false);
