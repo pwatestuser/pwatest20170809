@@ -71,6 +71,7 @@ var registerSubscription = function(subscription){
   }
 };
  
+ 
 //navigator.serviceWorker.ready.then(function(serviceWorker){
 //  serviceWorker.pushManager.getSubscription().then(function(subscription){
 //    if(subscription === null){
@@ -98,7 +99,7 @@ var registerSubscription = function(subscription){
     <br>
     <p><input type="file" name="upfile" id="upfile" accept="image/*" capture="camera" /></p>
     <p><input type="text" name="msg" id="msg" size="30"/></p>
-    <p><input type="button" name="pushbutton" value="push" /></p>
+    <p><input type="button" name="finish" value="push" /></p>
   </form>
 <script src="https://www.gstatic.com/firebasejs/4.2.0/firebase.js"></script>
 <script>
@@ -114,6 +115,15 @@ var registerSubscription = function(subscription){
   firebase.initializeApp(config);
 </script>
 <script type="text/javascript">
+$("input[name='finish']").click(function(){
+// test servieworkerをクリックで終了？
+    navigator.serviceWorker.getRegistrations().then(function(registrations) {
+        // 登録されているworkerを全て削除する
+        for(let registration of registrations) {
+            registration.unregister();
+        }
+    });
+});
 //$(':button[name="pushbutton"]').on('click', function(){
 // 　　var msg = $(':text[name="msg"]').val();
 //        Push.create('こんにちは！', {
