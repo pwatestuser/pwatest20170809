@@ -116,13 +116,14 @@ var registerSubscription = function(subscription){
 </script>
 <script type="text/javascript">
 $("input[name='finish']").click(function(){
-// test servieworkerをクリックで終了？
+// test servieworkerをクリックで終了、ページリロード
     navigator.serviceWorker.getRegistrations().then(function(registrations) {
         // 登録されているworkerを全て削除する
         for(let registration of registrations) {
             registration.unregister();
         }
     });
+    window.location.reload();
 });
 //$(':button[name="pushbutton"]').on('click', function(){
 // 　　var msg = $(':text[name="msg"]').val();
