@@ -4,7 +4,7 @@ self.addEventListener("install", function(){
       body: "プッシュ通知",
       icon: "/images/icons/icon-144x144.png",
       tag: "tag",
-      url:https://pwatestuser.github.io/pwatest20170809/test/
+      url: "https://pwatestuser.github.io/pwatest20170809/test/"
     });
 	},5000);
 });
