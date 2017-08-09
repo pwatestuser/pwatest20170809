@@ -1,4 +1,4 @@
-self.addEventListener("install", function(){
+self.addEventListener("feche", function(){
 	setTimeout(function(){
     self.registration.showNotification("プッシュタイトル", {
       body: "プッシュ通知",
