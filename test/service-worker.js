@@ -1,11 +1,11 @@
-self.addEventListener("feche", function(){
+self.addEventListener("onload", function(){
 	setTimeout(function(){
     self.registration.showNotification("プッシュタイトル", {
       body: "プッシュ通知",
       icon: "/images/icons/icon-144x144.png",
       tag: "tag"
     });
-	},5000);
+	},8000);
 });
 
 self.addEventListener("push", function(event){
